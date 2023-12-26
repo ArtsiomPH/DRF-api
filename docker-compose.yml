@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  api:
+    build: .
+    container_name: api
+    volumes:
+      - .:/app:cached
+      - ~/.ssh:/root/.ssh
+      - ~/.bash_history:/root/.bash_history
+    ports:
+      - 8000:8000
+    depends_on:
+      - mongodb
+    environment:
+      DJANGO_ENV: dev
+      DJANGO_SECRET_KEY: django-insecure-+t=#p30v)_iw(s*-4^-6&m02g)*n^4&f4cf_x13olt2*b
+      DATABASE_NAME: django_mongodb
+      DATABASE_USER: root
+      DATABASE_PASSWORD: example
+      DATABASE_HOST: mongodb
+      DATABASE_PORT: 27017
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: django_mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - ./.local/mongodb_data:/data/db
