@@ -14,7 +14,7 @@ services:
       - mongodb
     environment:
       DJANGO_ENV: dev
-      DJANGO_SECRET_KEY: django-insecure-+t=#p30v)_iw(s*-4^-6&m02g)*n^4&f4cf_x13olt2*b
+      DJANGO_SECRET_KEY: django-insecure-_&nr6qr@9a-w%#!#2_mv&@a1c*n%=ucc@9gklq@i#ah77$5e4s
       DATABASE_NAME: django_mongodb
       DATABASE_USER: root
       DATABASE_PASSWORD: example
